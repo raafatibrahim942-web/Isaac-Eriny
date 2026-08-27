@@ -1,1 +1,142 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دعوة زفاف إسحق وإريني</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Reem+Kufi:wght@600&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .card {
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            max-width: 500px;
+            width: 100%;
+            padding: 40px 25px;
+            text-align: center;
+            border: 1px solid #eaeaea;
+        }
+        h1 {
+            font-family: 'Reem Kufi', sans-serif;
+            color: #d4af37;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        p.subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .timer-container {
+            display: flex;
+            justify-content: space-around;
+            margin: 25px 0;
+            background: #faf8f5;
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px dashed #d4af37;
+        }
+        .time-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .time-number {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .time-label {
+            font-size: 0.85rem;
+            color: #7f8c8d;
+        }
+        .details {
+            margin: 25px 0;
+            line-height: 1.8;
+            font-size: 1rem;
+            color: #444;
+        }
+        .btn {
+            background-color: #d4af37;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background-color: #b89628;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h1>دعوة زفاف</h1>
+    <p class="subtitle">إسحق & إريني</p>
+    
+    <div class="details">
+        <p>يتشرفان بدعوتكم لمشاركتهما فرحة العمر</p>
+        <p><strong>الخميس، 15 أكتوبر 2026</strong></p>
+        <p>الساعة 8:00 مساءً</p>
+    </div>
+
+    <div class="timer-container">
+        <div class="time-box">
+            <span class="time-number" id="days">0</span>
+            <span class="time-label">يوم</span>
+        </div>
+        <div class="time-box">
+            <span class="time-number" id="hours">0</span>
+            <span class="time-label">ساعة</span>
+        </div>
+        <div class="time-box">
+            <span class="time-number" id="minutes">0</span>
+            <span class="time-label">دقيقة</span>
+        </div>
+        <div class="time-box">
+            <span class="time-number" id="seconds">0</span>
+            <span class="time-label">ثانية</span>
+        </div>
+    </div>
+</div>
+
+<script>
+    const weddingDate = new Date("2026-10-15T20:00:00").getTime();
+
+    const timer = setInterval(function() {
+        const now = new Date().getTime();
+        const difference = weddingDate - now;
+
+        if (difference < 0) {
+            clearInterval(timer);
+            document.querySelector(".timer-container").innerHTML = "<h3>أهلاً بكم في حفل الزفاف!</h3>";
+            return;
+        }
+
+        document.getElementById("days").innerText = Math.floor(difference / (1000 * 60 * 60 * 24));
+        document.getElementById("hours").innerText = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        document.getElementById("minutes").innerText = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+        document.getElementById("seconds").innerText = Math.floor((difference % (1000 * 60)) / 1000);
+    }, 1000);
+</script>
+
+</body>
+</html>
 
