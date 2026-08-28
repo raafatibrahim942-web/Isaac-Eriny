@@ -1,1 +1,95 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>دعوة زفاف إسحق وإريني</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background-color: #fcf8f5;
+      color: #333;
+      text-align: center;
+      min-height: 100vh;
+    }
+
+    /* شاشة صورة العروسين */
+    #intro-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      opacity: 1;
+      transition: opacity 1s ease-out; /* تأثير الاختفاء التدريجي */
+    }
+
+    #intro-screen img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    /* شاشة الدعوة الأساسية */
+    #invitation-card {
+      display: none;
+      padding: 40px 20px;
+      opacity: 0;
+      transition: opacity 1s ease-in;
+    }
+
+    #invitation-card.show {
+      display: block;
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1. شاشة الصورة الـ 5 ثواني -->
+  <div id="intro-screen">
+    <img src="52bf4d92-04d8-47d0-860c-c82991e1cb71.jpeg" alt="صورة العروسين">
+  </div>
+
+  <!-- 2. محتوى الدعوة (تقدر تعدل التفاصيل هنا) -->
+  <div id="invitation-card">
+    <h1>دعوة زفاف</h1>
+    <p style="margin-top: 20px; font-size: 1.2rem;">تتشرف عائلتنا بدعوتكم لحضور حفل زفاف</p>
+    <h2 style="margin: 15px 0; color: #b8860b;">إسحق & إريني</h2>
+    <p>يسعدنا حضوركم وتواجدكم معنا في هذا اليوم المميز</p>
+  </div>
+
+  <script>
+    // بعد 5 ثواني (5000 ملي ثانية) تبدأ الصورة بالختفاء وتظهر الدعوة
+    setTimeout(function() {
+      const intro = document.getElementById('intro-screen');
+      const card = document.getElementById('invitation-card');
+
+      // تبطيء الصورة (Fade out)
+      intro.style.opacity = '0';
+
+      setTimeout(function() {
+        intro.style.display = 'none'; // إخفاء عنصر الصورة تماماً
+        card.style.display = 'block'; // إظهار كارت الدعوة
+        setTimeout(function() {
+          card.classList.add('show');
+        }, 50);
+      }, 1000); // ينتظر ثانية حتى يكتمل تأثير الاختفاء
+
+    }, 5000);
+  </script>
+
+</body>
+</html>
 
