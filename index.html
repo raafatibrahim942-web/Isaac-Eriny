@@ -1,1 +1,239 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دعوة زفاف إسحق وإريني</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Reem+Kufi:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #0d1322;
+            font-family: 'Amiri', serif;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px 10px;
+            overflow-x: hidden;
+        }
+
+        /* 1. شاشة الصورة في البداية */
+        #intro-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 1.5s ease; /* اختفاء ناعم وبطائ */
+        }
+
+        #intro-screen img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        /* 2. كارت الدعوة الرئيسي */
+        .card {
+            background: linear-gradient(145deg, #151c2e, #0a0e1a);
+            border: 1px solid #d4af37;
+            border-radius: 24px;
+            padding: 40px 24px;
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), inset 0 0 15px rgba(212, 175, 55, 0.15);
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 1.5s ease, transform 1.5s ease;
+        }
+
+        /* فلاس لإظهار الكارت بعد الصورة */
+        .card.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .title {
+            font-family: 'Reem Kufi', sans-serif;
+            color: #d4af37;
+            font-size: 2rem;
+            margin-bottom: 12px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #e0e0e0;
+            margin-bottom: 24px;
+            letter-spacing: 0.5px;
+        }
+
+        .names {
+            font-family: 'Reem Kufi', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin: 20px 0;
+            color: #ffffff;
+        }
+
+        .names span {
+            color: #d4af37;
+            padding: 0 8px;
+        }
+
+        .details-box {
+            border: 1px dashed rgba(212, 175, 55, 0.4);
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            padding: 20px;
+            margin: 25px 0;
+            line-height: 2;
+            font-size: 1.15rem;
+        }
+
+        .details-box p {
+            margin: 6px 0;
+        }
+
+        .details-box strong {
+            color: #d4af37;
+        }
+
+        .countdown-title {
+            font-size: 1rem;
+            color: #a0aab8;
+            margin-bottom: 16px;
+        }
+
+        .countdown-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .time-box {
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            background: rgba(10, 14, 26, 0.8);
+            border-radius: 12px;
+            padding: 12px 4px;
+        }
+
+        .time-box .number {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #d4af37;
+            display: block;
+        }
+
+        .time-box .label {
+            font-size: 0.8rem;
+            color: #8c9ba5;
+            margin-top: 4px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- شاشة الصورة (تنتهي بعد 5 ثواني) -->
+    <div id="intro-screen">
+        <img src="52bf4d92-04d8-47d0-860c-c82991e1cb71.jpeg" alt="صورة العروسين">
+    </div>
+
+    <!-- كارت الدعوة -->
+    <div class="card" id="main-card">
+        <h1 class="title">دعوة زفاف</h1>
+        <p class="subtitle">يتشرفان بدعوتكم لحضور حفل الزفاف المبارك</p>
+        
+        <div class="names">
+            إسحق <span>&</span> إريني
+        </div>
+
+        <div class="details-box">
+            <p>⛪ <strong>الصلاة:</strong> كنيسة الملاك والبابا كيرلس</p>
+            <p>👑 <strong>الحفل:</strong> قاعة رويال بملوي</p>
+            <p>📅 <strong>التاريخ:</strong> الثلاثاء ٨ سبتمبر ٢٠٢٦</p>
+        </div>
+
+        <div class="countdown-title">المتبقي على اليوم الموعود</div>
+
+        <div class="countdown-container">
+            <div class="time-box">
+                <span class="number" id="seconds">00</span>
+                <span class="label">ثانية</span>
+            </div>
+            <div class="time-box">
+                <span class="number" id="minutes">00</span>
+                <span class="label">دقيقة</span>
+            </div>
+            <div class="time-box">
+                <span class="number" id="hours">00</span>
+                <span class="label">ساعة</span>
+            </div>
+            <div class="time-box">
+                <span class="number" id="days">00</span>
+                <span class="label">يوم</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 1. التلاشي التدريجي للصورة بعد 5 ثواني
+        setTimeout(function() {
+            const intro = document.getElementById('intro-screen');
+            const card = document.getElementById('main-card');
+
+            // يبدأ تلاشي الصورة
+            intro.style.opacity = '0';
+
+            // بعد ما التلاشي يخلص بـ 1.5 ثانية نشيل شاشة الصورة ونظهر كارت الدعوة
+            setTimeout(function() {
+                intro.style.display = 'none';
+                card.classList.add('show');
+            }, 1500);
+
+        }, 5000); // 5000 ملي ثانية = 5 ثواني
+
+        // 2. العداد التنازلي لتاريخ 8 سبتمبر 2026
+        const weddingDate = new Date("September 8, 2026 18:00:00").getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const difference = weddingDate - now;
+
+            if (difference > 0) {
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+                document.getElementById("days").innerText = days;
+                document.getElementById("hours").innerText = hours;
+                document.getElementById("minutes").innerText = minutes;
+                document.getElementById("seconds").innerText = seconds;
+            } else {
+                document.querySelector(".countdown-title").innerText = "ألف مبروك للعروسين!";
+                document.querySelector(".countdown-container").style.display = "none";
+            }
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+</body>
+</html>
 
