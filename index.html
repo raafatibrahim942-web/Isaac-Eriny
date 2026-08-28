@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Isaac & Eriny Wedding</title>
-    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Montserrat:wght@300;400;600&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Montserrat:wght@400;600;700&family=Aref+Ruqaa:wght@700&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             box-sizing: border-box;
@@ -25,7 +25,7 @@
             text-align: center;
         }
 
-        /* 1. الشاشة الأولى: الغلاف الذهبي */
+        /* 1. الشاشة الأولى: غلاف الدعوة */
         #cover-screen {
             position: fixed;
             top: 0;
@@ -54,16 +54,48 @@
             align-items: center;
             background: #ffffff;
             box-shadow: inset 0 0 15px rgba(212, 175, 55, 0.1), 0 10px 30px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+
+        .wreath-bg {
+            position: absolute;
+            width: 240px;
+            height: 240px;
+            background: radial-gradient(circle, rgba(74, 107, 93, 0.08) 0%, rgba(255,255,255,0) 70%);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1;
+        }
+
+        .wreath-bg::before {
+            content: "🌿🌺🌿";
+            position: absolute;
+            font-size: 3.5rem;
+            opacity: 0.35;
+            transform: rotate(-20deg);
+        }
+
+        .wreath-bg::after {
+            content: "🌸🌿🌸";
+            position: absolute;
+            font-size: 3.5rem;
+            opacity: 0.35;
+            transform: rotate(160deg);
         }
 
         .cover-title {
-            font-size: 3.5rem;
-            color: #4a6b5d;
-            font-family: 'Cairo', sans-serif;
+            position: relative;
+            z-index: 2;
+            font-size: 4.5rem;
+            color: #3b5749;
+            font-family: 'Aref Ruqaa', serif;
             font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
 
-        /* 2. الشاشة الثانية: تصميم الورود والأصداف بنفس ستايل الصورة */
+        /* 2. الشاشة الثانية: تصميم الورود والأصداف */
         #floral-screen {
             position: fixed;
             top: 0;
@@ -81,7 +113,6 @@
             overflow: hidden;
         }
 
-        /* زهور وأصداف مزخرفة منتشرة على الشاشة */
         .floral-element {
             position: absolute;
             font-size: 2.2rem;
@@ -103,29 +134,31 @@
             z-index: 2;
         }
 
+        /* تحسين خط الاسم ليكون واضح وقوي ومقروء */
         .floral-names {
-            font-family: 'Alex Brush', cursive;
-            font-size: 3.6rem;
-            color: #c47b62; /* وردي خشبي ناعم بنفس درجة الصورة */
-            margin-bottom: 8px;
-            font-weight: 500;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            color: #b05a40;
+            margin-bottom: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
             line-height: 1.2;
         }
 
         .floral-subtitle {
             font-family: 'Montserrat', sans-serif;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             letter-spacing: 5px;
-            color: #7a6b66;
+            color: #61524d;
             text-transform: uppercase;
-            font-weight: 400;
-            margin-bottom: 12px;
+            font-weight: 600;
+            margin-bottom: 16px;
         }
 
         .floral-line {
             width: 140px;
-            height: 1px;
-            background-color: #c47b62;
+            height: 2px;
+            background-color: #b05a40;
             margin: 0 auto;
             opacity: 0.6;
         }
@@ -152,13 +185,13 @@
             object-fit: contain;
         }
 
-        /* زرار التحكم بالصوت */
+        /* زرار تشغيل الموسيقى */
         .music-btn {
             position: fixed;
             bottom: 25px;
             z-index: 10001;
             background: #ffffff;
-            color: #c47b62;
+            color: #b05a40;
             border: 1px solid #e2b3a3;
             padding: 10px 20px;
             border-radius: 25px;
@@ -194,11 +227,12 @@
         }
 
         .names-main {
-            font-family: 'Alex Brush', cursive;
-            font-size: 3.8rem;
-            color: #c47b62;
-            margin-bottom: 2px;
-            line-height: 1.1;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.7rem;
+            color: #b05a40;
+            font-weight: 700;
+            margin-bottom: 6px;
+            line-height: 1.2;
         }
 
         .getting-married {
@@ -281,21 +315,21 @@
         <source src="AUDIO-2026-08-28-12-05-50.m4a" type="audio/x-m4a">
     </audio>
 
-    <!-- زرار التحكم بالصوت -->
+    <!-- زرار تشغيل الصوت -->
     <button class="music-btn" id="music-toggle" onclick="toggleMusic()">
         🎵 تشغيل الموسيقى
     </button>
 
-    <!-- 1. الشاشة الأولى: غلاف الدعوة -->
+    <!-- 1. الشاشة الأولى: الغلاف -->
     <div id="cover-screen">
         <div class="cover-frame">
+            <div class="wreath-bg"></div>
             <h1 class="cover-title">دعوة</h1>
         </div>
     </div>
 
-    <!-- 2. الشاشة الثانية: التصميم الوردي والأصداف بنفس الصورة -->
+    <!-- 2. الشاشة الثانية: تصميم الورود والأصداف -->
     <div id="floral-screen">
-        <!-- الرموز الورقية والتجميلية المشابهة للصورة -->
         <div class="floral-element f-top-left-1">🌸</div>
         <div class="floral-element f-top-left-2">🐚</div>
         <div class="floral-element f-top-right">🌺</div>
@@ -318,13 +352,13 @@
         <img src="52bf4d92-04d8-47d0-860c-c82991e1cb71.jpeg" alt="Isaac & Eriny">
     </div>
 
-    <!-- 4. الشاشة رابعة: الدعوة التفصيلية -->
+    <!-- 4. الشاشة الرابعة: كارت الدعوة الرئيسي -->
     <div class="card" id="main-card">
         <h1 class="names-main">Isaac & Eriny</h1>
         <div class="getting-married">Are Getting Married</div>
 
         <div class="details-box">
-            <p>⛪ <strong>الصلاة:</strong> كنيسة الملاك والبابا كيرلس</p>
+            <p>⛪ <strong>الصلاة:</strong> كنيسة الملاك والبابا كيرلس (الساعة ٨:٠٠ مساءً)</p>
             <p>👑 <strong>الحفل:</strong> قاعة رويال بملوي</p>
             <p>📅 <strong>التاريخ:</strong> الثلاثاء 8 سبتمبر 2026</p>
         </div>
@@ -379,7 +413,7 @@
         const photoScreen = document.getElementById('photo-screen');
         const mainCard = document.getElementById('main-card');
 
-        // تسلسل الشاشات: 3s غلاف ➔ 3s تصميم الورود والأصداف ➔ 3s صورة العروسين ➔ الدعوة
+        // تسلسل الانتقال (3 ثوانٍ لكل مرحلة)
         setTimeout(function() {
             coverScreen.style.opacity = '0';
 
@@ -414,8 +448,8 @@
 
         }, 3000);
 
-        // العداد التنازلي
-        const weddingDate = new Date("September 8, 2026 18:00:00").getTime();
+        // العداد التنازلي مضبوط على 8 سبتمبر الساعة 8 مساءً
+        const weddingDate = new Date("September 8, 2026 20:00:00").getTime();
 
         function updateCountdown() {
             const now = new Date().getTime();
