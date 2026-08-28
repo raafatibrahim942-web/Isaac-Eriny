@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>دعوة زفاف إسحق وإريني</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+  
   <style>
     * {
       box-sizing: border-box;
@@ -12,14 +16,17 @@
     }
 
     body {
-      font-family: system-ui, -apple-system, sans-serif;
-      background-color: #fcf8f5;
-      color: #333;
-      text-align: center;
+      font-family: 'Cairo', sans-serif;
+      background-color: #0d1b2a;
+      color: #ffffff;
       min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px 10px;
     }
 
-    /* شاشة صورة العروسين */
+    /* شاشة الصورة في البداية */
     #intro-screen {
       position: fixed;
       top: 0;
@@ -32,7 +39,7 @@
       align-items: center;
       z-index: 9999;
       opacity: 1;
-      transition: opacity 1s ease-out; /* تأثير الاختفاء التدريجي */
+      transition: opacity 1s ease-out;
     }
 
     #intro-screen img {
@@ -41,10 +48,17 @@
       object-fit: contain;
     }
 
-    /* شاشة الدعوة الأساسية */
+    /* كارت الدعوة */
     #invitation-card {
       display: none;
-      padding: 40px 20px;
+      width: 100%;
+      max-width: 450px;
+      background: #112233;
+      border: 1px solid #c5a059;
+      border-radius: 20px;
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
       opacity: 0;
       transition: opacity 1s ease-in;
     }
@@ -53,43 +67,328 @@
       display: block;
       opacity: 1;
     }
+
+    .title {
+      font-family: 'Amiri', serif;
+      font-size: 2.2rem;
+      color: #d4af37;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      font-size: 0.95rem;
+      color: #e0e0e0;
+      margin-bottom: 25px;
+      line-height: 1.6;
+    }
+
+    .names {
+      font-family: 'Amiri', serif;
+      font-size: 2.4rem;
+      font-weight: bold;
+      margin: 15px 0 25px 0;
+      color: #ffffff;
+    }
+
+    .names span {
+      color: #d4af37;
+      margin: 0 5px;
+    }
+
+    /* صندوق البيانات */
+    .details-box {
+      border: 1px dashed #c5a059;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 30px;
+      background-color: rgba(255, 255, 255, 0.02);
+    }
+
+    .detail-item {
+      font-size: 1.05rem;
+      margin: 12px 0;
+      color: #f0f0f0;
+    }
+
+    .detail-item strong {
+      color: #d4af37;
+    }
+
+    /* العداد التنازلي */
+    .timer-title {
+      font-size: 0.9rem;
+      color: #a0aab8;
+      margin-bottom: 15px;
+    }
+
+    .countdown {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .time-box {
+      flex: 1;
+      border: 1px solid #334e68;
+      border-radius: 10px;
+      padding: 10px 5px;
+      background: #1a2d42;
+    }
+
+    .time-box .number {
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: #d4af37;
+    }
+
+    .time-box .label {
+      font-size: 0.75rem;
+      color: #9fb3c8;
+      margin-top: 4px;
+    }
   </style>
 </head>
 <body>
 
-  <!-- 1. شاشة الصورة الـ 5 ثواني -->
+  <!-- شاشة الصورة (5 ثواني) -->
   <div id="intro-screen">
     <img src="52bf4d92-04d8-47d0-860c-c82991e1cb71.jpeg" alt="صورة العروسين">
   </div>
 
-  <!-- 2. محتوى الدعوة (تقدر تعدل التفاصيل هنا) -->
+  <!-- كارت الدعوة الرئيسي -->
   <div id="invitation-card">
-    <h1>دعوة زفاف</h1>
-    <p style="margin-top: 20px; font-size: 1.2rem;">تتشرف عائلتنا بدعوتكم لحضور حفل زفاف</p>
-    <h2 style="margin: 15px 0; color: #b8860b;">إسحق & إريني</h2>
-    <p>يسعدنا حضوركم وتواجدكم معنا في هذا اليوم المميز</p>
+    <h1 class="title">دعوة زفاف</h1>
+    <p class="subtitle">يتشرفان بدعوتكم لحضور حفل الزفاف المبارك</p>
+
+    <div class="names">
+      إسحق <span>&</span> إريني
+    </div>
+
+    <div class="details-box">
+      <div class="detail-item">
+        🏛️ <strong>الصلاة:</strong> كنيسة الملاك والبابا كيرلس
+      </div>
+      <div class="detail-item">
+        👑 <strong>الحفل:</strong> قاعة رويال بملوي
+      </div>
+    </div>
+
+    <div class="timer-title">المتبقي على اليوم الموعود</div>
+    
+    <div class="countdown">
+      <div class="time-box">
+        <div class="number" id="days">00</div>
+        <div class="label">يوم</div>
+      </div>
+      <div class="time-box">
+        <div class="number" id="hours">00</div>
+        <div class="label">ساعة</div>
+      </div>
+      <div class="time-box">
+        <div class="number" id="minutes">00</div>
+        <div class="label">دقيقة</div>
+      </div>
+      <div class="time-box">
+        <div class="number" id="seconds">00</div>
+        <div class="label">ثانية</div>
+      </div>
+    </div>
   </div>
 
   <script>
-    // بعد 5 ثواني (5000 ملي ثانية) تبدأ الصورة بالختفاء وتظهر الدعوة
+    // 1. التحكم في الصورة والدعوة
     setTimeout(function() {
       const intro = document.getElementById('intro-screen');
       const card = document.getElementById('invitation-card');
 
-      // تبطيء الصورة (Fade out)
       intro.style.opacity = '0';
 
       setTimeout(function() {
-        intro.style.display = 'none'; // إخفاء عنصر الصورة تماماً
-        card.style.display = 'block'; // إظهار كارت الدعوة
-        setTimeout(function() {
-          card.classList.add('show');
-        }, 50);
-      }, 1000); // ينتظر ثانية حتى يكتمل تأثير الاختفاء
-
+        intro.style.display = 'none';
+        card.classList.add('show');
+      }, 1000);
     }, 5000);
-  </script>
 
+    // 2. حساب العداد التنازلي لتاريخ 8 سبتمبر 2026
+    const weddingDate = new Date("September 8, 2026 18:00:00").getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = weddingDate - now;
+
+      if (distance > 0) {
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1إليك كود متكامل (HTML + CSS + JavaScript) يدمج تصميم الكارت الكحلي الفخم باللمسات الذهبية (مثل الصورة الأولى) مع تفاصيل العروسين (إسحق وإريني)، الكنيسة، القاعة، وتاريخ الفرح المحدد بتاريخ **8 سبتمبر 2026**.
+
+```html
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دعوة زفاف إسحق وإريني</title>
+    <link href="[https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Reem+Kufi:wght@500;700&display=swap](https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Reem+Kufi:wght@500;700&display=swap)" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background-color: #0d1322;
+            font-family: 'Amiri', serif;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px 10px;
+        }
+        .card {
+            background: linear-gradient(145deg, #151c2e, #0a0e1a);
+            border: 1px solid #d4af37;
+            border-radius: 24px;
+            padding: 40px 24px;
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), inset 0 0 15px rgba(212, 175, 55, 0.15);
+        }
+        .title {
+            font-family: 'Reem Kufi', sans-serif;
+            color: #d4af37;
+            font-size: 2rem;
+            margin-bottom: 12px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        .subtitle {
+            font-size: 1.1rem;
+            color: #e0e0e0;
+            margin-bottom: 24px;
+            letter-spacing: 0.5px;
+        }
+        .names {
+            font-family: 'Reem Kufi', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin: 20px 0;
+            color: #ffffff;
+        }
+        .names span {
+            color: #d4af37;
+            padding: 0 8px;
+        }
+        .details-box {
+            border: 1px dashed rgba(212, 175, 55, 0.4);
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            padding: 20px;
+            margin: 25px 0;
+            line-height: 2;
+            font-size: 1.15rem;
+        }
+        .details-box p {
+            margin: 6px 0;
+        }
+        .details-box strong {
+            color: #d4af37;
+        }
+        .countdown-title {
+            font-size: 1rem;
+            color: #a0aab8;
+            margin-bottom: 16px;
+        }
+        .countdown-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        .time-box {
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            background: rgba(10, 14, 26, 0.8);
+            border-radius: 12px;
+            padding: 12px 4px;
+        }
+        .time-box .number {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #d4af37;
+            display: block;
+        }
+        .time-box .label {
+            font-size: 0.8rem;
+            color: #8c9ba5;
+            margin-top: 4px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1 class="title">دعوة زفاف</h1>
+        <p class="subtitle">يتشرفان بدعوتكم لحضور حفل الزفاف المبارك</p>
+        
+        <div class="names">
+            إسحق <span>&</span> إريني
+        </div>
+
+        <div class="details-box">
+            <p>⛪ <strong>الصلاة:</strong> كنيسة الملاك والبابا كيرلس</p>
+            <p>👑 <strong>الحفل:</strong> قاعة رويال بملوي</p>
+            <p>📅 <strong>التاريخ:</strong> الثلاثاء ٨ سبتمبر ٢٠٢٦</p>
+        </div>
+
+        <div class="countdown-title">المتبقي على اليوم الموعود</div>
+
+        <div class="countdown-container">
+            <div class="time-box">
+                <span class="number" id="seconds">00</span>
+                <span class="label">ثانية</span>
+            </div>
+            <div class="time-box">
+                <span class="number" id="minutes">00</span>
+                <span class="label">دقيقة</span>
+            </div>
+            <div class="time-box">
+                <span class="number" id="hours">00</span>
+                <span class="label">ساعة</span>
+            </div>
+            <div class="time-box">
+                <span class="number" id="days">00</span>
+                <span class="label">يوم</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ضبط تاريخ الزفاف: 8 سبتمبر 2026
+        const weddingDate = new Date("September 8, 2026 18:00:00").getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const difference = weddingDate - now;
+
+            if (difference > 0) {
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+                document.getElementById("days").innerText = days;
+                document.getElementById("hours").innerText = hours;
+                document.getElementById("minutes").innerText = minutes;
+                document.getElementById("seconds").innerText = seconds;
+            } else {
+                document.querySelector(".countdown-title").innerText = "ألف مبروك للعروسين!";
+                document.querySelector(".countdown-container").style.display = "none";
+            }
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
 </body>
 </html>
-
